@@ -8,6 +8,9 @@ namespace WebApplication2.Context
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Exam> Exams { get; set; }
+
 
         public AppDbContext(DbContextOptions<AppDbContext> p):base(p)
         {
@@ -25,6 +28,8 @@ namespace WebApplication2.Context
                 new(){ Id=3,Marka="BMW",Model="320",Fiyat=7000, ModelYil=2003,Renk="Beyaz"},
 
             });
+
+            
 
 
 
