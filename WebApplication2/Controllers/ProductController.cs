@@ -72,6 +72,70 @@ namespace WebApplication2.Controllers
         }
 
 
+        [HttpGet("GetProducts")]
+        public IActionResult GetProducts([FromQuery] PagingParameter p)
+        {
+
+            Console.WriteLine(" PageSize : " + p.PageSize);
+            Console.WriteLine(" PageNumber : " + p.PageNumber);
+
+            //ef core ile pagination yapmak sende !
+
+            return Ok();
+        }
+
+
+
+        [HttpGet("GetWithFilters")]
+        public IActionResult GetCars([FromQuery] CarFilterParameter p)
+        {
+
+         
+
+
+
+            //ef core ile pagination yapmak sende !
+            _context.Cars.Where(x => x.ModelYil >= p.MinModelYil && x.ModelYil < p.MaxModelYil && x.Fiyat <= p.MaxFiyat && x.Fiyat >= p.MinFiyat);
+            //expression generate ederim // ref
+            var query =  _context.Cars.AsQueryable<Car>();
+
+            if (p.MaxModelYil != 0)
+            {
+               query=  query.Where(x => x.ModelYil <= p.MaxModelYil);
+            }
+            if (p.MinModelYil !=0)
+            {
+                query = query.Where(x => x.ModelYil >= p.MinModelYil);
+            }
+            if (p.MaxFiyat != 0)
+            {
+                query = query.Where(x => x.Fiyat <= p.MaxFiyat);
+            }
+            if (p.MinFiyat != 0)
+            {
+                query = query.Where(x => x.Fiyat >= p.MinFiyat);
+            }
+           
+            if (!string.IsNullOrEmpty(p.Renk))
+            {
+                query = query.Where(x => x.Renk == p.Renk);
+            }
+            if (!string.IsNullOrEmpty(p.Marka))
+            {
+                query = query.Where(x => x.Marka == p.Marka);
+            }
+            if (!string.IsNullOrEmpty(p.Model))
+            {
+                query = query.Where(x => x.Model == p.Model);
+            }
+
+
+            var data = query.ToList();
+
+            
+            return Ok(data);
+        }
+
 
     }
 }

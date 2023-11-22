@@ -1,12 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Context;
+using WebApplication2.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddScoped<GlobalExceptionFilter>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(o =>
+{
+    o.Filters.AddService<GlobalExceptionFilter>();
+});
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlCon"));
