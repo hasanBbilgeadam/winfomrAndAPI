@@ -79,9 +79,11 @@ namespace WebApplication2.Controllers
             Console.WriteLine(" PageSize : " + p.PageSize);
             Console.WriteLine(" PageNumber : " + p.PageNumber);
 
-            //ef core ile pagination yapmak sende !
 
-            return Ok();
+
+
+
+            return Ok(_context.Products.ToList()); ;
         }
 
 
