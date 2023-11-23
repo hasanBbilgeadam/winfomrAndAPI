@@ -37,7 +37,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware<CustomMiddleware>();
+app.UseMiddleware<RequestLimitMiddleware>();//bu genel izin
+app.UseMiddleware<CustomMiddleware>();//product endpoint ile alakalý
 
 app.MapControllers();
 
