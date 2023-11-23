@@ -98,6 +98,14 @@ namespace WebApplication2.Controllers
             var result = sum / 3.0;
             return Ok(result.ToString());
         }
+
+        [HttpGet("TestException")]
+        public IActionResult TestException()
+        {
+            throw new DivideByZeroException();
+
+            return Ok();
+        }
     }
 
 

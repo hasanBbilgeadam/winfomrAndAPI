@@ -20,8 +20,11 @@ namespace WebApplication2.Middlewares
             // api/product/getalll
             if (context.Request.Path.ToString().ToLower().Contains("product"))
             {
+                //api rate control
 
-                //ip control
+
+
+                //ip control => blackListIP table 
                 Console.WriteLine(context.Connection.RemoteIpAddress.ToString());
 
                 var result = context.Request.Headers.TryGetValue("izin", out StringValues value);

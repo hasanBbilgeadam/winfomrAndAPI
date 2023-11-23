@@ -11,7 +11,7 @@ builder.Services.AddScoped<GlobalExceptionFilter>();
 
 builder.Services.AddControllers(o =>
 {
-    o.Filters.AddService<GlobalExceptionFilter>();
+    //o.Filters.AddService<GlobalExceptionFilter>();
 });
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -23,6 +23,8 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 
+//app.UseExceptionHandler()
+app.UseMiddleware<CustomExceptionHandlingMiddelware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

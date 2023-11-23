@@ -10,6 +10,7 @@ namespace WebApplication2.Context
         public DbSet<Car> Cars { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Exam> Exams { get; set; }
+        public DbSet<AppLog> AppLogs { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> p):base(p)
